@@ -10,7 +10,10 @@ end FSM;
 
 architecture waterSystem of FSM is
 
-  type state_type is (ST0,ST1,ST2);
+  subtype state_type is std_logic_vector(1 downto 0);
+  constant ST0: state_type := "00";
+  constant ST1: state_type := "01";
+  constant ST2: state_type := "11";
   signal present_state , next_state : state_type;
 begin
 
@@ -18,8 +21,8 @@ first_proc : process (CLK,reset,next_state)
   begin
     if(reset = '1')then
       present_state <= ST0;
-    else
-      present_state <= next_state;
+    elsif(rising_edge(CLK))then
+      	present_state <= next_state;
 
     end if;
 end process first_proc;
