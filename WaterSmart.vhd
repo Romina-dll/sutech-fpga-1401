@@ -26,5 +26,46 @@ first_proc : process (CLK,reset,next_state)
 
     end if;
 end process first_proc;
+second_proc : process (T,L,M,present_state)
+  begin
+    case present_state is
+      when ST0 =>
+        if(T='1' and L='1')then
+          if(M > "011")then
+            next_state <= ST0;
+            seg7 <= "1110110";
+          else
+            next_state <= ST1;
+            seg7 <= "1000000";
+          end if;
+        else
+          if(M <= "001")then
+            next_state <= ST1;
+            seg7 <= "1000000";
+          else
+            next_state <= ST0;
+            seg7 <= "1110110";
+          end if;
+        end if;
+      when ST1 =>
+
+        if(M >= "111")then
+          next_state <= ST0;
+          seg7 <= "1110110";
+        elsif(T='1' and L ='1')then
+            next_state <= ST1;
+            seg7 <= "1000000";
+          elsif(M < "011")then
+              next_state <= ST1;
+              seg7 <= "1000000";
+            else
+              next_state <= ST0;
+              seg7 <= "1110110";
+        end if;
+      when others =>
+        next_state <= ST0;
+        seg7 <= "1110110";
+    end case;
+end process second_proc;
 
 end waterSystem;
