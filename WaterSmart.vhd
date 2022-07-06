@@ -67,5 +67,14 @@ second_proc : process (T,L,M,present_state)
         seg7 <= "1110110";
     end case;
 end process second_proc;
+third_proc : process (present_state)
+begin
+  if(present_state = ST0)then
+    output <= '0';
+  else
+    output <= '1';
+
+  end if;
+end process third_proc;
 
 end waterSystem;
