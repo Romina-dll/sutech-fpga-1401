@@ -30,7 +30,7 @@ second_proc : process (T,L,M,present_state)
   begin
     case present_state is
       when ST0 =>
-        if(T='1' and L='1')then
+        if(T='0' and L='0')then
           if(M > "011")then
             next_state <= ST0;
             seg7 <= "1110110";
@@ -52,7 +52,7 @@ second_proc : process (T,L,M,present_state)
         if(M >= "111")then
           next_state <= ST0;
           seg7 <= "1110110";
-        elsif(T='1' and L ='1')then
+        elsif(T='0' and L ='0')then
             next_state <= ST1;
             seg7 <= "1000000";
           elsif(M < "011")then
