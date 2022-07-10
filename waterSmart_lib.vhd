@@ -10,7 +10,10 @@ package waterSmart_lib is
        		     seg7          : out std_logic_vector(6 downto 0));
 	end component FSM;
 
-	constant ST0: state_type := "00";
+  
+  subtype state_type is std_logic_vector(1 downto 0);
+    
+  constant ST0: state_type := "00";
   constant ST1: state_type := "01";
   constant ST2: state_type := "11";
 
